@@ -141,6 +141,41 @@ let myLinkedList = new LinkedList(1);
 myLinkedList.push(2);
 myLinkedList.push(3);
 myLinkedList.push(4);
-myLinkedList.reverse();
 
-console.log(myLinkedList);
+//Doubly linked list
+
+class DoublyLinkedNode {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.previous = null;
+  }
+}
+
+class DoublyLinkedList {
+  constructor(value) {
+    const doublyNode = new DoublyLinkedNode(value);
+    this.head = doublyNode;
+    this.tail = this.head;
+    this.length = 1;
+  }
+
+  push(value) {
+    let newNode = new DoublyLinkedNode(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      newNode.previous = this.tail;
+      this.tail = newNode;
+    }
+    this.length++;
+    return this;
+  }
+}
+
+let node = new DoublyLinkedList(1);
+node.push(2);
+node.push(3);
+console.log(node);
