@@ -1,6 +1,6 @@
 //creating and manipulating linkedList
 
-//differents methods of a linkedList such as (push, unshift, insert, pop) share ont thing in common they create  a node so let's have a function
+//differents methods of a linkedList such as (push, unshift, insert) share ont thing in common they create  a node so let's have a function
 // that creates nodes for each method
 
 class LinkedNode {
@@ -173,9 +173,42 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+
+  pop() {
+    if (!this.head) return undefined;
+    let temporary = this.tail;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = temporary.previous;
+      this.tail.next = null;
+      temporary.previous = null;
+    }
+
+    this.length--;
+    return temporary;
+  }
+
+  unshift(value) {
+    let node = new DoublyLinkedNode(value);
+    if (!this.head) {
+      this.tail = node;
+      this.head = node;
+    } else {
+      this.head.previous = node;
+      node.next = this.head;
+      this.head = node;
+    }
+
+    this.length++;
+    return this;
+  }
 }
 
 let node = new DoublyLinkedList(1);
-node.push(2);
-node.push(3);
+
+node.unshift(0);
+
+console.log("/////////////////");
 console.log(node);
