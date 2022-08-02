@@ -365,6 +365,59 @@ class Queue {
 const queue = new Queue(1);
 queue.enqueue(2);
 queue.enqueue(3);
-console.log(queue.dequeue());
+/* console.log(queue.dequeue());
 console.log("/////////////////////////");
-console.log(queue);
+console.log(queue); */
+
+// creating a binary Search Tree.
+class Treenode {
+  constructor(value) {
+    this.value = value;
+    this.right = null;
+    this.left = null;
+  }
+}
+
+class BinarySearchTree {
+  constructor() {
+    this.root = null; // create the framework of the binary search tree without creating a new node;
+  }
+
+  insert(value) {
+    const node = new Treenode(value);
+    if (this.root === null) {
+      this.root = node;
+      return this;
+    }
+    let temp = this.root;
+    while (true) {
+      if (node.value === temp.value) return undefined; // because we do not want duplicate value in the tree, otherwise best bet would be to add a count within the constructor and increase it.
+      if (node.value < temp.value) {
+        if (!temp.left) {
+          temp.left = node;
+          return this;
+        } else {
+          temp = temp.left;
+        }
+      } else {
+        if (temp.right === null) {
+          temp.right = node;
+          return this;
+        } else {
+          temp = temp.right;
+        }
+      }
+    }
+  }
+}
+
+let bst = new BinarySearchTree();
+bst.insert(47);
+bst.insert(21);
+bst.insert(76);
+bst.insert(18);
+bst.insert(27);
+bst.insert(52);
+bst.insert(82);
+
+console.log(bst);
