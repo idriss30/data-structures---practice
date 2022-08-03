@@ -435,4 +435,63 @@ bst.insert(27);
 bst.insert(52);
 bst.insert(82);
 
-console.log(bst.contains(18));
+//console.log(bst.contains(18));
+
+// hash table
+class HashTable {
+  // size = represent the default value if none is given
+  constructor(size = 7) {
+    this.dataMap = new Array(size);
+  }
+  // the _ inside of the hash signals other developers not to use it outside or of other methods.
+  _hash(key) {
+    let hash = 0;
+    for (let i = 0; i < key.length; i++) {
+      hash = (hash + key.charCodeAt(i) * 23) % this.dataMap.length;
+    }
+    return hash;
+  }
+
+  set(key, value) {
+    let index = this._hash(key);
+    if (!this.dataMap[index]) {
+      this.dataMap[index] = [];
+    }
+    this.dataMap[index].push([key, value]);
+    return this;
+  }
+  get(key) {
+    let index = this._hash(key);
+    if (this.dataMap[index]) {
+      let temp = null;
+      this.dataMap[index].forEach(([itemKey, value]) => {
+        if (itemKey === key) {
+          temp = value;
+        }
+      });
+      return temp;
+    }
+    return undefined;
+  }
+  keys() {
+    let keys = [];
+    for (let i = 0; i < this.dataMap.length; i++) {
+      if (this.dataMap[i]) {
+        this.dataMap[i].forEach((item) => {
+          keys.push(item[0]);
+        });
+      }
+    }
+    return keys;
+  }
+}
+
+const hashTable = new HashTable();
+
+hashTable.set("bolts", 100);
+hashTable.set("washers", 50);
+hashTable.set("screws", 5000);
+hashTable.set("lumber", 1000);
+
+console.log("////////////////////////////////");
+console.log(hashTable.keys());
