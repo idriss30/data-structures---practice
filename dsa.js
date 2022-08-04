@@ -493,5 +493,63 @@ hashTable.set("washers", 50);
 hashTable.set("screws", 5000);
 hashTable.set("lumber", 1000);
 
-console.log("////////////////////////////////");
-console.log(hashTable.keys());
+/* console.log("////////////////////////////////");
+console.log(hashTable.keys()); */
+
+class Graph {
+  constructor() {
+    this.adjacencyList = {};
+  }
+
+  addVerTex(vertex) {
+    if (!this.adjacencyList[vertex]) {
+      this.adjacencyList[vertex] = [];
+      return true;
+    }
+    return false;
+  }
+  addEdge(vertex1, vertex2) {
+    if (this.adjacencyList[vertex1] && this.adjacencyList[vertex2]) {
+      this.adjacencyList[vertex1].push(vertex2);
+      this.adjacencyList[vertex2].push(vertex1);
+      return true;
+    }
+    return false;
+  }
+
+  removeEdge(vertex1, vertex2) {
+    if (this.adjacencyList[vertex1] && this.adjacencyList[vertex2]) {
+      this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
+        (v) => v !== vertex2
+      );
+      this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(
+        (v) => v !== vertex1
+      );
+    }
+  }
+
+  removeVertex(vertex) {
+    if (!this.adjacencyList[vertex]) return undefined;
+    while (this.adjacencyList[vertex].length) {
+      let temp = this.adjacencyList[vertex].pop();
+      this.removeEdge(temp, vertex);
+    }
+
+    delete this.adjacencyList[vertex];
+
+    return this;
+  }
+}
+
+const graph = new Graph();
+console.log(graph.addVerTex("A"));
+console.log(graph.addVerTex("E"));
+graph.addVerTex("B");
+graph.addEdge("A", "B");
+graph.addEdge("A", "E");
+graph.addEdge("B", "E");
+console.log(graph);
+console.log("/////////////////////////////");
+console.log(graph);
+graph.removeVertex("B");
+console.log(graph);
