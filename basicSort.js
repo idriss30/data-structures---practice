@@ -36,5 +36,21 @@ function selectionSort(array) {
   return array;
 }
 let s = selectionSort([10, 8, 20, 3, 4, 2, 1, 9]);
-console.log(".......................");
-console.log(s);
+/* console.log(".......................");
+console.log(s); */
+/* 
+
+FizzBuzz is a task where the programmer is asked to print numbers from 1 to 100, 
+but here's the catch, multiple of three should print 
+“Fizz” and similarly print “Buzz” for multiples of 5 and lastly print “FizzBuzz” for multiples of three and five */
+
+const fizzbuzz = () => {
+  for (let i = 1; i <= 100; i++) {
+    if (i === 1) console.log("FizzBuzz", i);
+    if (i % 3 === 0) console.log("Fizz", i);
+    if (i % 5 === 0) console.log("Buzz", i);
+    if (i % 3 === 0 && i % 5 === 0) console.log("FizzBuzz");
+  }
+};
+
+fizzbuzz();
